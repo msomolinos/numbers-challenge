@@ -1,0 +1,30 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.candidates .grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.candidates .grid span {
+  padding: 1em;
+  width: 2em;
+  display: inline-block;
+  border: solid;
+  border-radius: 20px;
+  float: left;
+  margin-left: 2px;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal.show {
+  display: block;
+}
