@@ -1,0 +1,21 @@
+.builder {
+    padding-bottom: 1em;
+}
+
+.builder .hidden {
+    display: none;
+}
+
+.builder .show {
+    display: block;
+}
+
+.builder span {
+    padding: 1em;
+    width: 2em;
+    border: solid;
+    border-radius: 20px;
+    float: left;
+    margin-left: 3px;
+    min-height: 2em;
+}

@@ -1,0 +1,18 @@
+.operation {
+    padding: 1em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.operation-span-basic {
+    box-shadow: 2px 2px 1px 1px lightgrey;
+}
+
+.operation-span-valid {
+    box-shadow: 2px 2px 1px 1px lightgreen;
+}
+
+.operation-span-error {
+    box-shadow: 2px 2px 1px 1px lightcoral;
+}

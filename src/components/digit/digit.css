@@ -1,0 +1,12 @@
+.digit-basic {
+    background: transparent;
+    box-shadow: 2px 2px 1px 1px lightgrey;
+}
+
+.digit-best-option {
+    box-shadow: 2px 2px 1px 1px lightblue;
+}
+
+.digit-operation {
+    box-shadow: 2px 2px 1px 1px lightsalmon;
+}
