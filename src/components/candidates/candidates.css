@@ -1,0 +1,27 @@
+
+.candidates .grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.candidates .grid span {
+  padding: 1em;
+  width: 2em;
+  display: inline-block;
+  border: solid;
+  border-radius: 20px;
+  float: left;
+  margin-left: 3px;
+  cursor: pointer;
+}
+
+.candidates .grid span:hover {
+  background: lemonchiffon;
+  box-shadow: 2px 2px 1px 1px lemonchiffon;
+}
+
+.best-option button {
+  margin: 1em 0 0 0;
+  padding: 1em;
+}

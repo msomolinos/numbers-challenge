@@ -1,4 +1,4 @@
-import Board from "./board.tsx";
+import Board from "../board/board.tsx";
 
 const Results = ({winner, bestOption, statements}) => {
     const title = (winner) ? `Here is a winner` : `Good effort this is your very best result`

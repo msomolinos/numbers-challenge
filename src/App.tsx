@@ -1,6 +1,6 @@
 import './App.css'
-import Game from "./components/game.tsx";
-import {newCandidates, newChallenge} from "./components/generator.ts";
+import Game from "./components/game/game.tsx";
+import {newCandidates, newChallenge} from "./utils/generator.ts";
 
 const candidates = newCandidates()
 const challenge = newChallenge(candidates)
