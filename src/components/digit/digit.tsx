@@ -1,8 +1,16 @@
-import {isNullOrBlank} from "../operation/operation.type.ts";
+import {isNullOrBlank, OperationType} from "../operation/operation.type.ts";
 import {useEffect, useState} from "react";
 import './digit.css'
+import {useDispatch, useSelector} from "react-redux";
+import {State} from "../../redux/state.ts";
+import {createBestOptionCandidateNewAction, createOperationUpdateAction} from "./action.ts";
 
-const Digit = ({ digit, operation, setOperation, bestOptionCandidate, setBestOptionCandidate}) => {
+const Digit = ({ digit }) => {
+
+    const operation = useSelector((state: State) => state.operation)
+    const bestOptionCandidate = useSelector((state: State) => state.bestOptionCandidate)
+
+    const dispatch = useDispatch()
 
     const [digitClassName, setDigitClassName] = useState('digit-basic')
 
@@ -18,19 +26,19 @@ const Digit = ({ digit, operation, setOperation, bestOptionCandidate, setBestOpt
 
     const fetchDigit = (digit) => {
         if (isNullOrBlank(operation)) {
-            setBestOptionCandidate(digit)
+            dispatch(createBestOptionCandidateNewAction(digit))
             setDigitClassName('digit-best-option')
         } else {
             if (!operation.digit1 || (operation.digit2 && operation.digit2 === digit)) {
-                setOperation({
+                dispatch(createOperationUpdateAction({
                     ...operation,
                     digit1: digit,
-                })
+                } as OperationType))
             } else {
-                setOperation({
+                dispatch(createOperationUpdateAction({
                     ...operation,
                     digit2: digit,
-                })
+                } as OperationType))
             }
         }
 

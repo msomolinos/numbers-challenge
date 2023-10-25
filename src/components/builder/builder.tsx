@@ -2,45 +2,36 @@ import {
     calculate,
     collectStatement,
     isValidOperation,
-    OperationType,
 } from "../operation/operation.type.ts";
-import {Statement} from "../../utils/statement.ts";
-import {DigitType} from "../digit/digit.type.ts";
 import Operation from "../operation/operation.tsx";
 import './builder.css'
+import {useDispatch, useSelector} from "react-redux";
+import {createCandidatesDeleteAction, createCandidatesNewAction, createStatementsNewAction} from "./action.ts";
+import {createOperationInitAction} from "../challenge/action.ts";
+import {State} from "../../redux/state.ts";
 
-const Builder = ({candidates, setCandidates, operation, setOperation, statements, setStatements}) => {
+const Builder = () => {
+
+    const operation = useSelector((state: State) => state.operation)
+    const dispatch = useDispatch()
 
     const submitNewCandidate = () => {
-        setStatements(statements.concat([new Statement(collectStatement(operation))]))
+        dispatch(createStatementsNewAction(collectStatement(operation)))
         const result = calculate(operation);
-        const newCandidates = candidates.filter((digit) => digit !== operation.digit1 && digit !== operation.digit2)
-            .concat([new DigitType(result)])
-        setCandidates(newCandidates)
-        setOperation({ show: false })
+        dispatch(createCandidatesDeleteAction(operation.digit1))
+        dispatch(createCandidatesDeleteAction(operation.digit2))
+        dispatch(createCandidatesNewAction(result))
+        dispatch(createOperationInitAction())
     }
 
     const cancelCandidate = () => {
-        setOperation({ show: false })
-    }
-
-    const setSymbol = (symbol = "") => {
-
-        const currentOperation = operation ?? {} as OperationType
-        setOperation({
-            ...currentOperation,
-            symbol: symbol,
-        })
-
+        dispatch(createOperationInitAction())
     }
 
     return (
         <div className='builder'>
             <div className={(operation.show) ? 'show' : 'hidden'}>
-                <Operation
-                    operation={operation}
-                    setSymbol={setSymbol}
-                />
+                <Operation />
             </div>
 
             <div className='actions'>

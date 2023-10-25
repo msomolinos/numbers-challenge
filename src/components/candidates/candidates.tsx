@@ -1,20 +1,28 @@
 import Digit from '../digit/digit.tsx'
 import {DigitType} from "../digit/digit.type.ts";
 import './candidates.css'
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {createBestOptionNewAction} from "../game/action.ts";
+import {State} from "../../redux/state.ts";
+import {createBestOptionCandidateRemoveAction} from "./action.ts";
 
-const Candidates = ({candidates, operation, setOperation, setBestOption}) => {
+const Candidates = () => {
 
-    const [bestOptionCandidate, setBestOptionCandidate] = useState({} as DigitType)
+    const operation = useSelector((state: State) => state.operation)
+    const candidates = useSelector((state: State) => state.candidates)
+    const bestOptionCandidate = useSelector((state: State) => state.bestOptionCandidate)
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (operation.show) {
-            setBestOptionCandidate({} as DigitType)
+            dispatch(createBestOptionCandidateRemoveAction())
         }
     }, [operation]);
 
     const chooseBestOption = () => {
-        setBestOption(bestOptionCandidate.value)
+        bestOptionCandidate && dispatch(createBestOptionNewAction(bestOptionCandidate.value))
     }
 
     const showBestOption = () => {
@@ -29,10 +37,6 @@ const Candidates = ({candidates, operation, setOperation, setBestOption}) => {
                     candidates.map((digit: DigitType) => <Digit
                         key={digit.id}
                         digit={digit}
-                        operation={operation}
-                        setOperation={setOperation}
-                        bestOptionCandidate={bestOptionCandidate}
-                        setBestOptionCandidate={setBestOptionCandidate}
                     />)
                 }
             </div>

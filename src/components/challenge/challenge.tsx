@@ -1,49 +1,43 @@
 import Candidates from '../candidates/candidates.tsx'
 import Board from '../board/board.tsx'
 import Builder from '../builder/builder.tsx'
-import {useState} from 'react'
-import {OperationType} from "../operation/operation.type.ts";
 import './challenge.css'
+import {useDispatch, useSelector} from "react-redux";
+import {
+    createCandidatesResetAction,
+    createOperationInitAction,
+    createOperationStartAction,
+    createStatementsResetAction
+} from "./action.ts";
+import {State} from "../../redux/state.ts";
 
-const Challenge = ({original, candidates, setCandidates, statements, setStatements, setBestOption}) => {
+const Challenge = () => {
 
-    const [operation, setOperation] = useState<OperationType>({ show: false} as OperationType)
+    const operation =  useSelector((state: State) => state.operation)
+
+    const dispatch = useDispatch()
 
     const resetChallenge = () => {
-        setCandidates(original)
-        setStatements([])
-        setBestOption(0)
-        setOperation({ show: false} as OperationType)
+        dispatch(createCandidatesResetAction())
+        dispatch(createStatementsResetAction())
+        dispatch(createOperationInitAction())
     }
 
     const startBuilder = () => {
-        setOperation({ show: true} as OperationType)
+        dispatch(createOperationStartAction())
     }
 
     return (
         <section className='challenge'>
-            <Candidates
-                candidates={candidates}
-                operation={operation}
-                setOperation={setOperation}
-                setBestOption={setBestOption}
-            />
+            <Candidates />
 
             <div className="best-option">
                 <button id="open-builder" onClick={startBuilder} hidden={operation?.show}>New Operation</button>
             </div>
 
-            <Builder
-                candidates={candidates}
-                setCandidates={setCandidates}
-                operation={operation}
-                setOperation={setOperation}
-                statements={statements}
-                setStatements={setStatements}
-            />
+            <Builder />
 
-            <Board
-                statements={statements}/>
+            <Board />
 
             <hr/>
 

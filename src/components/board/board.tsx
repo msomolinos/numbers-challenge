@@ -1,6 +1,10 @@
 import {Statement} from "../../utils/statement.ts";
+import {useSelector} from "react-redux";
+import {State} from "../../redux/state.ts";
 
-const Board = ({statements}) => {
+const Board = () => {
+
+    const statements = useSelector((state: State) => state.statements)
     return (
         <div className='statements'>
             {

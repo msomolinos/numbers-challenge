@@ -1,14 +1,17 @@
 import './App.css'
 import Game from "./components/game/game.tsx";
-import {newCandidates, newChallenge} from "./utils/generator.ts";
-
-const candidates = newCandidates()
-const challenge = newChallenge(candidates)
+import {Provider} from "react-redux";
+import {getStore} from "./redux/store.ts";
+import Generator from "./components/generator/generator.tsx";
 
 function App() {
-  return (
-    <Game original={candidates} challenge={challenge}/>
-  )
+    return (
+        <Provider store={getStore()}>
+            <Generator>
+                <Game/>
+            </Generator>
+        </Provider>
+    )
 }
 
 export default App

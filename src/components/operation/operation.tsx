@@ -1,9 +1,16 @@
 import Dropdown from "../dropdown/dropdown.tsx";
 import './operation.css'
-import {calculate, isValidOperation} from "./operation.type.ts";
+import {calculate, isValidOperation, OperationType} from "./operation.type.ts";
 import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {State} from "../../redux/state.ts";
+import {createOperationUpdateAction} from "../digit/action.ts";
 
-const Operation = ({operation, setSymbol}) => {
+const Operation = () => {
+
+    const operation = useSelector((state: State) => state.operation)
+
+    const dispatch = useDispatch()
 
     const [operationSpanClassName, setOperationSpanClassName] = useState('operation-span-basic')
 
@@ -16,6 +23,15 @@ const Operation = ({operation, setSymbol}) => {
             setOperationSpanClassName('operation-span-basic')
         }
     }, [operation]);
+
+
+
+    const setSymbol = (symbol = "") => {
+        dispatch(createOperationUpdateAction({
+            ...operation,
+            symbol: symbol
+        } as OperationType))
+    }
 
     return (
         <div className='operation'>

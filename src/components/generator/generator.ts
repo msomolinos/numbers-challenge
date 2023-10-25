@@ -1,4 +1,4 @@
-import {DigitType} from "../components/digit/digit.type.ts";
+import {DigitType} from "../digit/digit.type.ts";
 
 const source = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 25, 75, 50, 100]
 const maxCandidates = 6
